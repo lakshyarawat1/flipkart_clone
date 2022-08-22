@@ -1,8 +1,12 @@
+import { AppBar, Toolbar } from '@mui/material';
+
 const header = () => {
     return (
-        <div>
-            This is the header of the page
-        </div>
+        <AppBar>
+            <Toolbar>
+
+            </Toolbar>
+        </AppBar>
     )
 }
 

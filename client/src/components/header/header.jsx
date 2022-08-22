@@ -1,13 +1,17 @@
-import { AppBar, Toolbar } from '@mui/material';
+import { AppBar, Toolbar, styled } from '@mui/material';
+
+const StyledHeader = styled(AppBar)`
+    background: #2874f0;
+`
 
 const header = () => {
     return (
-        <AppBar>
+        <StyledHeader>
             <Toolbar>
 
             </Toolbar>
-        </AppBar>
+        </StyledHeader>
     )
 }
 
-export default header
+export default header;

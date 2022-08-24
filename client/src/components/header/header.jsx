@@ -1,4 +1,6 @@
 import { AppBar, Toolbar, styled, Box, Typography } from '@mui/material';
+import Search from './search'
+
 
 const StyledHeader = styled(AppBar)`
     background: #2874f0;
@@ -39,6 +41,7 @@ const header = () => {
                         </SubHeading>
                     </Box>
                 </Component>
+                <Search />
             </Toolbar>
         </StyledHeader>
     )

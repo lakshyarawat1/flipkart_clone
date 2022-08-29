@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/lakshyarawat1/flipkart_clone/issues"
   },
-  "homepage": "https://github.com/lakshyarawat1/flipkart_clone#readme"
+  "homepage": "https://github.com/lakshyarawat1/flipkart_clone#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }

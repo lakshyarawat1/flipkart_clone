@@ -11,12 +11,15 @@ const SearchContainer = styled(Box)`
 `;
 
 const SearchIconWrapper = styled(Box)`
-    color : blue;
+    color : #2874f0;
+    padding : 5px;
+    padding-top : 8px;
 `
 
 const InputSearchBase = styled(InputBase)`
     padding-left : 20px;
     width : 100%;
+    font-size : unset;
 `
 
 const Search = () => {

@@ -1,5 +1,6 @@
 import { AppBar, Toolbar, styled, Box, Typography } from '@mui/material';
 import Search from './search'
+import CustomButtons from './customButtons';
 
 
 const StyledHeader = styled(AppBar)`
@@ -42,6 +43,9 @@ const header = () => {
                     </Box>
                 </Component>
                 <Search />
+                <Box>
+                    <CustomButtons />
+                </Box>
             </Toolbar>
         </StyledHeader>
     )

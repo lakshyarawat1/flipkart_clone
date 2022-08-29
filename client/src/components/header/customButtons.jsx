@@ -8,11 +8,13 @@ const Wrapper = styled(Box)`
         margin-right : 40px;
         font-size : 15px;
         align-items : center;
+        font-weight : 600;
     }
 `
 
 const Container = styled(Box)`
     display : flex;
+    margin-bottom : 12px;
 `
 
 const LoginButton = styled(Button)`
@@ -24,6 +26,8 @@ const LoginButton = styled(Button)`
     box-shadow : none;
     font-weight : 600;
     margin-bottom : 15px;
+    height : 32px;
+    margin-top : 7px;
 `
 
 
@@ -34,14 +38,14 @@ const CustomButtons = () => {
                 Login
             </LoginButton>
 
-            <Typography style={{ marginTop : 3, width : 135 }}>
-                Become a seller
+            <Typography style={{ marginTop : 12, width : 150 }}>
+                Become a Seller
             </Typography>
-            <Typography style={{ marginTop : 3 }}>More</Typography>
+            <Typography style={{ marginTop: 12, marginRight : 54 }}>More</Typography>
 
             <Container>
                 <ShoppingCart />
-                <Typography>
+                <Typography style={{ fontWeight : 600 }}>
                     Cart
                 </Typography>
             </Container>

@@ -8,6 +8,8 @@ const SearchContainer = styled(Box)`
     border-radius : 2px;
     margin-left : 10px;
     display : flex;
+    height : 38px;
+    margin-bottom : 10px;
 `;
 
 const SearchIconWrapper = styled(Box)`
@@ -19,7 +21,7 @@ const SearchIconWrapper = styled(Box)`
 const InputSearchBase = styled(InputBase)`
     padding-left : 20px;
     width : 100%;
-    font-size : unset;
+    font-size : 14px;
 `
 
 const Search = () => {

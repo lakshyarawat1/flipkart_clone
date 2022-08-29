@@ -23,6 +23,7 @@ const LoginButton = styled(Button)`
     border-radius : 2px;
     box-shadow : none;
     font-weight : 600;
+    margin-bottom : 15px;
 `
 
 

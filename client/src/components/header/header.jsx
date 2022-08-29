@@ -5,6 +5,7 @@ import CustomButtons from './customButtons';
 
 const StyledHeader = styled(AppBar)`
     background: #2874f0;
+    height : 57px;
 `
 
 const Component = styled(Box)`
@@ -13,7 +14,7 @@ const Component = styled(Box)`
 `
 
 const SubHeading = styled(Typography)`
-    font-size : 12px;
+    font-size : 11px;
     font-style: italic;
 `
 

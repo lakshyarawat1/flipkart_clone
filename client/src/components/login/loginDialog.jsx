@@ -1,5 +1,6 @@
 import { Dialog, Box, TextField, Typography, Button, styled } from '@mui/material'
-import  { useState } from 'react'
+import { useState } from 'react'
+import { authenticateSignup } from '../../service/api'
 
 const Component = styled(Box)`
     height : 80vh;
@@ -96,7 +97,11 @@ const LoginDialog = ({ open, setOpen }) => {
     }
 
     const onInputChange = (e) => {
-        setSignUp({ ...signup,  })
+        setSignUp({ ...signup, [e.target.name]:e.target.value })
+    }
+
+    const signUpUser = () => {
+        authenticateSignup(signup);
     }
 
     const [account, toggleAccount] = useState(accountInitialValue.login) 
@@ -133,7 +138,7 @@ const LoginDialog = ({ open, setOpen }) => {
                                 <TextField variant='standard' name='email' label='Enter Email' style={{ marginTop: 20}} onChange = {(e) => onInputChange(e)} />
                                 <TextField variant='standard' name='password' label='Enter Password' style={{ marginTop: 20}} onChange = {(e) => onInputChange(e)} />
                                 <TextField variant='standard' name='phone' label='Enter Phone' style={{ marginTop: 20}} onChange = {(e) => onInputChange(e)} />
-                                <LoginButton>Continue</LoginButton>
+                                <LoginButton onClick={() => signUpUser}>Continue</LoginButton>
                                 <RequestOTP style={{ marginTop : 20 }}>Existing User ?</RequestOTP>
                         </Wrapper> 
                     }

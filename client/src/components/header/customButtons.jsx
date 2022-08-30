@@ -1,6 +1,7 @@
 import { Box, Button, Typography ,styled } from '@mui/material'
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import LoginDialog from '../login/loginDialog'
+import { useState } from 'react'
 
 const Wrapper = styled(Box)`
     display:flex;
@@ -33,9 +34,14 @@ const LoginButton = styled(Button)`
 
 
 const CustomButtons = () => {
+
+    const [ open, setOpen ] = useState(false);
+    const openDialog = () => {
+        setOpen(true);
+    }
     return (
         <Wrapper>
-            <LoginButton varient="contained">
+            <LoginButton varient="contained" onClick={() => openDialog()}>
                 Login
             </LoginButton>
 
@@ -50,7 +56,7 @@ const CustomButtons = () => {
                     Cart
                 </Typography>
             </Container>
-            <LoginDialog />
+            <LoginDialog open={open} />
         </Wrapper>
     )
 }

@@ -1,8 +1,8 @@
 import { Dialog } from '@mui/material'
 
-const LoginDialog = () => {
+const LoginDialog = ({ open }) => {
     return (
-        <Dialog open={true}>
+        <Dialog open={open}>
             This is dialog box
         </Dialog>
     )

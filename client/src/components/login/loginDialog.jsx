@@ -45,6 +45,7 @@ const RequestOTP = styled(Button)`
     background : #fff;
     height : 48px;
     border-radius : 2px;
+    font-weight : 600;  
     box-shadow : 0 2px 4px 0 rgb(0 0 0 /20%) 
 `
 
@@ -63,20 +64,43 @@ const CreateAccount = styled(Typography)`
 
 const accountInitialValue = {
     login: {
-        view  :'Login'
+        view: 'login',
+        heading: 'Login',
+        subHeading : 'Get access to your Orders, Wishlist and Recommendations'
     },
     signup: {
-        view : 'Signup'
+        view: 'signup',
+        heading: `Looks like you're new here!`,
+        subHeading : 'Sign up with your mobile number to get started'
     }
+}
+
+const signUpInitialValues = {
+    firstName: '',
+    lastName: '',
+    userName: '',
+    email: '',
+    password: '',
+    phone : ''
 }
 
 const LoginDialog = ({ open, setOpen }) => {
      
     const handleClose = () => {
         setOpen(false)
+        toggleAccount(accountInitialValue.login)
     }
 
-    const [account, toggleAccount ] = useState(accountInitialValue.login) 
+    const toggleSignUp = () => {
+        toggleAccount(accountInitialValue.signup)
+    }
+
+    const onInputChange = (e) => {
+        setSignUp({ ...signup,  })
+    }
+
+    const [account, toggleAccount] = useState(accountInitialValue.login) 
+    const [signup, setSignUp ] = useState(signUpInitialValues)
     
     return (
         <Dialog open={open} onClose={handleClose} PaperProps={{ sx : { maxWidth : 'unset' } }}>
@@ -84,14 +108,14 @@ const LoginDialog = ({ open, setOpen }) => {
                 <Box style={{ display: 'flex', height : '100%' }}>
                     <Image>
                         <Typography variant='h5'>
-                            Login
+                            {account.heading}
                         </Typography>
                         <Typography style={{marginTop : 20}}>
-                            Get access to your Orders, Wishlist and Recommendations
+                            {account.subHeading}
                         </Typography>
                     </Image>
                     {
-                        true ?
+                        account.view === 'login' ?
                         <Wrapper>
                             <TextField variant='standard' label='Enter Email/Mobile number' style={{ marginTop: 20 }} />
                             <TextField variant='standard' label='Enter Password' style={{ marginTop: 20 }} />
@@ -99,18 +123,18 @@ const LoginDialog = ({ open, setOpen }) => {
                             <LoginButton style={{ marginTop: 20 }}>Login</LoginButton>
                             <Typography style={{ marginTop: 20, textAlign: 'center' }}>OR</Typography>
                             <RequestOTP style={{ marginTop: 20 }}>Request OTP</RequestOTP>
-                            <CreateAccount style={{ marginTop: 120 }}>New to Flipkart? Create an account</CreateAccount>
+                            <CreateAccount style={{ marginTop: 120 }}  onClick={()=> toggleSignUp()} >New to Flipkart? Create an account</CreateAccount>
                         </Wrapper>
                     :
                         <Wrapper>
-                            <TextField variant='standard' label='Enter First Name' style={{ marginTop: 20 }} />
-                                <TextField variant='standard' label='Enter Last Name' style={{ marginTop: 20 }} />
-                                <TextField variant='standard' label='Enter Username' style={{ marginTop: 20 }} />
-                                <TextField variant='standard' label='Enter Email' style={{ marginTop: 20 }} />
-                                <TextField variant='standard' label='Enter Password' style={{ marginTop: 20 }} />
-                                <TextField variant='standard' label='Enter Phone' style={{ marginTop: 20 }} />
-                            <RequestOTP style={{ marginTop: 20 }}>Request OTP</RequestOTP>
-                            <CreateAccount style={{ marginTop: 120 }}>New to Flipkart? Create an account</CreateAccount>
+                                <TextField variant='standard' name='firstName' label='Enter Firstname' style={{ marginTop: 20}} onChange = {(e) => onInputChange(e)} />
+                                <TextField variant='standard' name='lastName' label='Enter Lastname' style={{ marginTop: 20}} onChange = {(e) => onInputChange(e)}  />
+                                <TextField variant='standard' name='userName' label='Enter Username' style={{ marginTop: 20}} onChange = {(e) => onInputChange(e)} />
+                                <TextField variant='standard' name='email' label='Enter Email' style={{ marginTop: 20}} onChange = {(e) => onInputChange(e)} />
+                                <TextField variant='standard' name='password' label='Enter Password' style={{ marginTop: 20}} onChange = {(e) => onInputChange(e)} />
+                                <TextField variant='standard' name='phone' label='Enter Phone' style={{ marginTop: 20}} onChange = {(e) => onInputChange(e)} />
+                                <LoginButton>Continue</LoginButton>
+                                <RequestOTP style={{ marginTop : 20 }}>Existing User ?</RequestOTP>
                         </Wrapper> 
                     }
                 </Box>

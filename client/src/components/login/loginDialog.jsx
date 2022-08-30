@@ -100,8 +100,9 @@ const LoginDialog = ({ open, setOpen }) => {
         setSignUp({ ...signup, [e.target.name]:e.target.value })
     }
 
-    const signUpUser = () => {
-        authenticateSignup(signup);
+    const signUpUser = async () => {
+        let response = await authenticateSignup(signup);
+        console.log(response)
     }
 
     const [account, toggleAccount] = useState(accountInitialValue.login) 

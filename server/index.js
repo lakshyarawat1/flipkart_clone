@@ -1,6 +1,7 @@
 import express from 'express'
 import env from 'dotenv'
 import Connection from './database/db.js'
+import defaultData from './default.js'
 
 //my_app
 const app = express();
@@ -13,3 +14,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log("Server is running on https://localhost:", PORT);
 });
+
+defaultData();

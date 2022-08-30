@@ -1,21 +1,22 @@
 import { Dialog , Box , TextField, Typography ,Button ,styled } from '@mui/material'
 
 const Component = styled(Box)`
-    height : 75vh;
-    width : 90vh;
+    height : 80vh;
+    width : 100vh;
 `
 
 const Image = styled(Box)`
     background : #2874f0 url(https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/login_img_c4a81e.png) center 85% no-repeat;
-    height : 100%;
-    width : 40%;
+    width : 30%;
     padding : 45px 35px;
     & > p {
         color : #fff;
+        font-size : 17px;
     }
     & > h5 {
         color : #fff;
         font-weight : 600;
+        font-size : 28px;
     }
 `
 
@@ -78,13 +79,13 @@ const LoginDialog = ({ open, setOpen }) => {
                         </Typography>
                     </Image>
                     <Wrapper>
-                        <TextField variant='standard' label='Enter Email/Mobile number' />
-                        <TextField variant='standard' label='Enter Password' />
-                        <Text style={{marginTop : 20}}>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Text>
+                        <TextField variant='standard' label='Enter Email/Mobile number' style={{ marginTop : 20}} />
+                        <TextField variant='standard' label='Enter Password' style={{marginTop : 20}} />
+                        <Text style={{marginTop : 25}}>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Text>
                         <LoginButton style={{marginTop : 20}}>Login</LoginButton>
                         <Typography style= {{marginTop : 20, textAlign : 'center'}}>OR</Typography>
                         <RequestOTP style={{marginTop : 20}}>Request OTP</RequestOTP>
-                        <CreateAccount style= {{marginTop :20}}>New to Flipkart? Create an account</CreateAccount>
+                        <CreateAccount style= {{marginTop :120}}>New to Flipkart? Create an account</CreateAccount>
                     </Wrapper>
                 </Box>
             </Component>

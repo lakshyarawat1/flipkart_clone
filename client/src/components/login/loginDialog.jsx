@@ -1,4 +1,5 @@
-import { Dialog , Box , TextField, Typography ,Button ,styled } from '@mui/material'
+import { Dialog, Box, TextField, Typography, Button, styled } from '@mui/material'
+import  { useState } from 'react'
 
 const Component = styled(Box)`
     height : 80vh;
@@ -60,11 +61,22 @@ const CreateAccount = styled(Typography)`
     curser : pointer
 `
 
+const accountInitialValue = {
+    login: {
+        view  :'Login'
+    },
+    signup: {
+        view : 'Signup'
+    }
+}
+
 const LoginDialog = ({ open, setOpen }) => {
      
     const handleClose = () => {
         setOpen(false)
     }
+
+    const [account, toggleAccount ] = useState(accountInitialValue.login) 
     
     return (
         <Dialog open={open} onClose={handleClose} PaperProps={{ sx : { maxWidth : 'unset' } }}>
@@ -78,15 +90,29 @@ const LoginDialog = ({ open, setOpen }) => {
                             Get access to your Orders, Wishlist and Recommendations
                         </Typography>
                     </Image>
-                    <Wrapper>
-                        <TextField variant='standard' label='Enter Email/Mobile number' style={{ marginTop : 20}} />
-                        <TextField variant='standard' label='Enter Password' style={{marginTop : 20}} />
-                        <Text style={{marginTop : 25}}>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Text>
-                        <LoginButton style={{marginTop : 20}}>Login</LoginButton>
-                        <Typography style= {{marginTop : 20, textAlign : 'center'}}>OR</Typography>
-                        <RequestOTP style={{marginTop : 20}}>Request OTP</RequestOTP>
-                        <CreateAccount style= {{marginTop :120}}>New to Flipkart? Create an account</CreateAccount>
-                    </Wrapper>
+                    {
+                        true ?
+                        <Wrapper>
+                            <TextField variant='standard' label='Enter Email/Mobile number' style={{ marginTop: 20 }} />
+                            <TextField variant='standard' label='Enter Password' style={{ marginTop: 20 }} />
+                            <Text style={{ marginTop: 25 }}>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Text>
+                            <LoginButton style={{ marginTop: 20 }}>Login</LoginButton>
+                            <Typography style={{ marginTop: 20, textAlign: 'center' }}>OR</Typography>
+                            <RequestOTP style={{ marginTop: 20 }}>Request OTP</RequestOTP>
+                            <CreateAccount style={{ marginTop: 120 }}>New to Flipkart? Create an account</CreateAccount>
+                        </Wrapper>
+                    :
+                        <Wrapper>
+                            <TextField variant='standard' label='Enter First Name' style={{ marginTop: 20 }} />
+                                <TextField variant='standard' label='Enter Last Name' style={{ marginTop: 20 }} />
+                                <TextField variant='standard' label='Enter Username' style={{ marginTop: 20 }} />
+                                <TextField variant='standard' label='Enter Email' style={{ marginTop: 20 }} />
+                                <TextField variant='standard' label='Enter Password' style={{ marginTop: 20 }} />
+                                <TextField variant='standard' label='Enter Phone' style={{ marginTop: 20 }} />
+                            <RequestOTP style={{ marginTop: 20 }}>Request OTP</RequestOTP>
+                            <CreateAccount style={{ marginTop: 120 }}>New to Flipkart? Create an account</CreateAccount>
+                        </Wrapper> 
+                    }
                 </Box>
             </Component>
         </Dialog>

@@ -1,4 +1,5 @@
 {
+  "type" : "module",
   "name": "flipkart_clone",
   "version": "1.0.0",
   "description": "This is the clone website of flikpart for educational training purposes",

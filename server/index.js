@@ -1,11 +1,15 @@
-const express = require('express');
-const env = require('dotenv')
+import express from 'express'
+import env from 'dotenv'
+import Connection from './database/db.js'
 
-
+//my_app
 const app = express();
 
-PORT = process.env.PORT || 4000
+// db_connection
+Connection();
+
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log('Server is running on https://localhost:', PORT);
-})
+  console.log("Server is running on https://localhost:", PORT);
+});

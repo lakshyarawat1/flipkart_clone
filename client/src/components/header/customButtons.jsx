@@ -1,7 +1,6 @@
 import { Button, Box, Typography , styled } from '@mui/material'
 import { ShoppingCart } from '@mui/icons-material'
 
-
 const Wrapper = styled(Box)`
     display : flex;
 `
@@ -22,6 +21,8 @@ const Container = styled(Box)`
 `
 
 const CustomButtons = () => {
+
+
     return (
         <Wrapper>
             <LoginButton variant="contained" style={{ marginLeft : 25 }}>
@@ -43,4 +44,4 @@ const CustomButtons = () => {
     )
 }
 
-export default CustomButtons
+export default CustomButtons;

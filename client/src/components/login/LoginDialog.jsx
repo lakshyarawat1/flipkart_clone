@@ -30,8 +30,10 @@ const RequestOTP = styled(Button)`
     text-transform : none;
     height : 6.5vh;
     width : 80%;
+    border-radius : 2px;
     margin-left : 30px;
     margin-top : 10px;
+    box-shadow : 0 3px 3px 0 #878787;
 `
 
 const Image = styled(Box)`
@@ -43,17 +45,25 @@ const Image = styled(Box)`
 const Heading = styled(Typography)`
     font-size : 28px;
     font-weight :600;
-    margin-top : 50px;
-    margin-left : 30px;
+    margin-top : 40px;
+    margin-left : 20px;
     color : #fff;
+`
+
+const Wrapper = styled(Box)`
+    width : 65%;
 `
 
 const accountInitialValues = {
     login: {
-        view : 'login'
+        view: 'login',
+        heading: 'Login',
+        subHeading : 'Get access to your Orders, Wishlist and Recommendations'
     },
     signup: {
-        view : 'signup'
+        view: 'signup',
+        heading: `Looks like you're new here!`,
+        subHeading : 'Sign up with your mobile number to get started'
     }
 }
 
@@ -64,9 +74,14 @@ const LoginDialog = ({ open, setOpen }) => {
     const toggleSignUp = () => {
         toggleAccount(accountInitialValues.signup)
     }
+
+    const toggleSignIn = () => {
+        toggleAccount(accountInitialValues.login)
+    }
     
     const handleClose = () => {
         setOpen(false);
+        toggleAccount(accountInitialValues.login)
     }
     return (
         <Dialog open={open} onClose={handleClose}>
@@ -74,10 +89,10 @@ const LoginDialog = ({ open, setOpen }) => {
                 <Box style={{display : 'flex'}}>
                 <Image>
                         <Heading>
-                            Login
+                            {account.heading}
                         </Heading>
                         <Typography style={{ margin : 20 , color : '#f9f9f9' }}>
-                            Get access to your Orders, Wishlist and Recommendations
+                            {account.subHeading}
                         </Typography>
                     </Image>
                     {
@@ -89,18 +104,53 @@ const LoginDialog = ({ open, setOpen }) => {
                             <LoginButton>Login</LoginButton>
                                 <Typography style={{ marginTop: 10 , textAlign : 'center' , color : '#878787', fontWeight : 400}}>OR</Typography>
                             <RequestOTP>Request OTP</RequestOTP>
-                            <Typography style={{ fontSize : 14 , textAlign : 'center' , color : '#2874f0', fontWeight :600, marginTop : 90}} onClick={()=>toggleSignUp()}>New to Flipkart? Create an account</Typography>
+                            <Typography style={{ fontSize : 14 , textAlign : 'center' , color : '#2874f0', fontWeight :600, marginTop : 90, cursor : 'pointer'}} onClick={()=>toggleSignUp()}>New to Flipkart? Create an account</Typography>
                         </Box>
                     :
-                        <Box>
-                            <TextField variant='standard' label='Enter First Name' style={{ width: '80%', marginTop: 50, marginLeft: 25 }} />
-                            <TextField variant='standard' label='Enter Last Name' style={{ width: '80%', marginTop: 50, marginLeft: 25 }} />
-                            <TextField variant='standard' label='Enter Email' style={{width : '80%',marginTop : 50, marginLeft : 25 }} />
-                            <TextField variant='standard' label='Enter Password' style={{ width: '80%', marginTop: 50, marginLeft: 25 }} />
-                            <TextField variant='standard' label='Enter Phone' style={{width : '80%',marginTop : 50, marginLeft : 25 }} />
+                        <Wrapper>
+                                <TextField
+                                    variant='standard'
+                                    label='Enter First Name'
+                                    style={{
+                                        width: '70%',
+                                        marginTop: 50,
+                                        marginLeft: 25
+                                    }} />
+                                <TextField
+                                    variant='standard'
+                                    label='Enter Last Name'
+                                    style={{
+                                        width: '70%',
+                                        marginTop: 20,
+                                        marginLeft: 25
+                                    }} />
+                                <TextField
+                                    variant='standard'
+                                    label='Enter Email'
+                                    style={{
+                                        width: '70%',
+                                        marginTop: 20,
+                                        marginLeft: 25
+                                    }} />
+                                <TextField
+                                    variant='standard'
+                                    label='Enter Password'
+                                    style={{
+                                        width: '70%',
+                                        marginTop: 20,
+                                        marginLeft: 25
+                                    }} />
+                                <TextField
+                                    variant='standard'
+                                    label='Enter Phone'
+                                    style={{
+                                        width: '70%',
+                                        marginTop: 20,
+                                        marginLeft: 25
+                                    }} />
                             <LoginButton>Continue</LoginButton>
-                            <Typography style={{ fontSize : 14 , textAlign : 'center' , color : '#2874f0', fontWeight :600, marginTop : 90}}>New to Flipkart? Create an account</Typography>
-                        </Box> 
+                            <Typography style={{ cursor : 'pointer' , fontSize : 14 , textAlign : 'center' , color : '#2874f0', fontWeight :600, marginTop : 50}} onClick={()=>toggleSignIn()} >Already registered ? Login</Typography>
+                        </Wrapper> 
                     }
                 </Box>
             </Component>

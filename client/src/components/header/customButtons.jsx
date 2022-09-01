@@ -22,10 +22,9 @@ const Container = styled(Box)`
 
 const CustomButtons = () => {
 
-
     return (
         <Wrapper>
-            <LoginButton variant="contained" style={{ marginLeft : 25 }}>
+            <LoginButton variant="contained" style={{ marginLeft : 25 }} >
                 Login
             </LoginButton>
             <Typography style={{ marginLeft : 40 }}>

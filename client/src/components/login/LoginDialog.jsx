@@ -1,6 +1,7 @@
 import { Dialog, TextField, Typography ,Button, styled} from '@mui/material'
 import { Box } from '@mui/system';
 import { useState } from 'react'
+import { authenticateSignUp } from '../../services/api';
 
 const Component = styled(Box)`
     height : 80vh;
@@ -67,9 +68,20 @@ const accountInitialValues = {
     }
 }
 
+const signUpInitialValues = {
+    firstName: '',
+    lastName: '',
+    userName : '',
+    email: '',
+    password: '',
+    phone: '',
+
+}
+
 const LoginDialog = ({ open, setOpen }) => {
 
     const [account, toggleAccount] = useState(accountInitialValues.login)
+    const [signup, setSignUp] = useState(signUpInitialValues)
 
     const toggleSignUp = () => {
         toggleAccount(accountInitialValues.signup)
@@ -82,6 +94,16 @@ const LoginDialog = ({ open, setOpen }) => {
     const handleClose = () => {
         setOpen(false);
         toggleAccount(accountInitialValues.login)
+    }
+
+    const onInputChange = (e) => {
+        setSignUp({ ...signup, [e.target.name]: [e.target.value] })
+        console.log(signup)
+    }
+
+    const signUpUser = async () => {
+        console.log(signup)
+        await authenticateSignUp(signup)
     }
     return (
         <Dialog open={open} onClose={handleClose}>
@@ -110,6 +132,8 @@ const LoginDialog = ({ open, setOpen }) => {
                         <Wrapper>
                                 <TextField
                                     variant='standard'
+                                    name='firstName'
+                                    onChange ={ (e)=> onInputChange(e)}
                                     label='Enter First Name'
                                     style={{
                                         width: '70%',
@@ -118,6 +142,8 @@ const LoginDialog = ({ open, setOpen }) => {
                                     }} />
                                 <TextField
                                     variant='standard'
+                                    name='lastName'
+                                   onChange ={ (e)=> onInputChange(e)}
                                     label='Enter Last Name'
                                     style={{
                                         width: '70%',
@@ -126,6 +152,18 @@ const LoginDialog = ({ open, setOpen }) => {
                                     }} />
                                 <TextField
                                     variant='standard'
+                                    onChange ={ (e)=> onInputChange(e)}
+                                    label='Enter Username'
+                                    name='userName'
+                                    style={{
+                                        width: '70%',
+                                        marginTop: 20,
+                                        marginLeft: 25
+                                    }} />
+                                <TextField
+                                    variant='standard'
+                                    name='email'
+                                    onChange ={ (e)=> onInputChange(e)}
                                     label='Enter Email'
                                     style={{
                                         width: '70%',
@@ -134,6 +172,8 @@ const LoginDialog = ({ open, setOpen }) => {
                                     }} />
                                 <TextField
                                     variant='standard'
+                                    name='password'
+                                    onChange ={ (e)=> onInputChange(e)}
                                     label='Enter Password'
                                     style={{
                                         width: '70%',
@@ -142,13 +182,15 @@ const LoginDialog = ({ open, setOpen }) => {
                                     }} />
                                 <TextField
                                     variant='standard'
+                                    name='phone'
+                                    onChange ={ (e)=> onInputChange(e)}
                                     label='Enter Phone'
                                     style={{
                                         width: '70%',
                                         marginTop: 20,
                                         marginLeft: 25
                                     }} />
-                            <LoginButton>Continue</LoginButton>
+                            <LoginButton onClick={()=>signUpUser()}>Continue</LoginButton>
                             <Typography style={{ cursor : 'pointer' , fontSize : 14 , textAlign : 'center' , color : '#2874f0', fontWeight :600, marginTop : 50}} onClick={()=>toggleSignIn()} >Already registered ? Login</Typography>
                         </Wrapper> 
                     }

@@ -97,7 +97,7 @@ const LoginDialog = ({ open, setOpen }) => {
     }
 
     const onInputChange = (e) => {
-        setSignUp({ ...signup, [e.target.name]: [e.target.value] })
+        setSignUp({ ...signup, [e.target.name]: e.target.value })
         console.log(signup)
     }
 

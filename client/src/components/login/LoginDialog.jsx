@@ -1,7 +1,7 @@
 import { Dialog, TextField, Typography ,Button, styled} from '@mui/material'
 import { Box } from '@mui/system';
 import { useState } from 'react'
-import { authenticateSignUp } from '../../services/api';
+import { authenticateSignUp, authenticateLogin } from '../../services/api';
 
 const Component = styled(Box)`
     height : 80vh;
@@ -78,10 +78,17 @@ const signUpInitialValues = {
 
 }
 
+const loginInitialValues = {
+    userName: '',
+    password : ''
+}
+
 const LoginDialog = ({ open, setOpen }) => {
 
     const [account, toggleAccount] = useState(accountInitialValues.login)
     const [signup, setSignUp] = useState(signUpInitialValues)
+    const [login, setLogin] = useState(loginInitialValues)
+    const [error, setError] = useState(false)
 
     const toggleSignUp = () => {
         toggleAccount(accountInitialValues.signup)
@@ -96,14 +103,27 @@ const LoginDialog = ({ open, setOpen }) => {
         toggleAccount(accountInitialValues.login)
     }
 
+    const onValueChange = (e) => {
+        setLogin({ ...login, [e.target.name]: e.target.value })
+    }
+
+    const loginUser = async () => {
+        let response = await authenticateLogin(login)
+        console.log(response)
+        if (response.status === 200) {
+            handleClose();
+        }
+    }
+
     const onInputChange = (e) => {
         setSignUp({ ...signup, [e.target.name]: e.target.value })
         console.log(signup)
     }
 
     const signUpUser = async () => {
-        console.log(signup)
-        await authenticateSignUp(signup)
+        let response = await authenticateSignUp(signup)
+        if (!response) return;
+        handleClose();
     }
     return (
         <Dialog open={open} onClose={handleClose}>
@@ -120,10 +140,11 @@ const LoginDialog = ({ open, setOpen }) => {
                     {
                         account.view === 'login' ?  
                         <Box>
-                            <TextField variant='standard' label='Enter Email/Mobile Number' style={{width : '80%',marginTop : 50, marginLeft : 25 }} />
-                                <TextField variant='standard' label='Enter Password' style={{ width : '80%' , marginTop : 30, marginLeft : 25}} />
+                            <TextField onChange={(e) => onValueChange(e)} name='userName' variant='standard' label='Enter Username' style={{width : '80%',marginTop : 50, marginLeft : 25 }} />
+                                {error && <Typography style={{color : 'red'}}>Please enter a valid username and password</Typography>}
+                             <TextField onChange={(e) => onValueChange(e)} name='password' variant='standard' label='Enter Password' style={{ width: '80%', marginTop: 30, marginLeft: 25 }} />
                             <Tagline>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Tagline>
-                            <LoginButton>Login</LoginButton>
+                            <LoginButton onClick={()=>loginUser()}>Login</LoginButton>
                                 <Typography style={{ marginTop: 10 , textAlign : 'center' , color : '#878787', fontWeight : 400}}>OR</Typography>
                             <RequestOTP>Request OTP</RequestOTP>
                             <Typography style={{ fontSize : 14 , textAlign : 'center' , color : '#2874f0', fontWeight :600, marginTop : 90, cursor : 'pointer'}} onClick={()=>toggleSignUp()}>New to Flipkart? Create an account</Typography>

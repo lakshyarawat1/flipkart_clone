@@ -1,6 +1,6 @@
 import User from '../models/userSchema.js'
 
-const userSignUp = async (request, response) => {
+export const userSignUp = async (request, response) => {
   try {
     const exist = await User.findOne({ userName: request.body.userName });
     if (exist) {
@@ -17,4 +17,21 @@ const userSignUp = async (request, response) => {
   }
 };
 
-export default userSignUp
+export const userLogin = async (req, res) => {
+  try {
+    const userName = req.body.userName;
+    const password = req.body.password;
+
+
+    let user = await User.findOne({ userName: userName, password: password })
+    if (user) {
+      return (res.status(200).json(' login successful '))
+    } else {
+      return res.status(401).json('Invalid Login')
+    }
+  } catch (error) {
+    return res.status(500).json({message : error})
+  }
+}
+
+export default { userSignUp, userLogin }

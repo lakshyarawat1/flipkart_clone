@@ -4,7 +4,8 @@ import { useEffect } from 'react'
 import NavBar from './Navbar'
 import Banner from './banner'
 import { getProducts } from '../../redux/actions/productActions.js'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import Slide from './slide'
 
 const Container = styled(Box)`
     padding : 20px 10px 10px 10px;
@@ -12,6 +13,8 @@ const Container = styled(Box)`
 `
 
 const Home = () => {
+
+    const { products } = useSelector(state => state.getProducts)
 
     const dispatch = useDispatch();
 
@@ -24,6 +27,7 @@ const Home = () => {
             <NavBar />
             <Container>
                 <Banner />
+                <Slide products={products} />
             </Container>
         </>
     )

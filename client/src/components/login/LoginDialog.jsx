@@ -88,7 +88,7 @@ const LoginDialog = ({ open, setOpen }) => {
     const [account, toggleAccount] = useState(accountInitialValues.login)
     const [signup, setSignUp] = useState(signUpInitialValues)
     const [login, setLogin] = useState(loginInitialValues)
-    const [error, setError] = useState(false)
+    const [error] = useState(false)
 
     const toggleSignUp = () => {
         toggleAccount(accountInitialValues.signup)
@@ -158,7 +158,7 @@ const LoginDialog = ({ open, setOpen }) => {
                                     label='Enter First Name'
                                     style={{
                                         width: '70%',
-                                        marginTop: 50,
+                                        marginTop: 20,
                                         marginLeft: 25
                                     }} />
                                 <TextField
@@ -212,7 +212,7 @@ const LoginDialog = ({ open, setOpen }) => {
                                         marginLeft: 25
                                     }} />
                             <LoginButton onClick={()=>signUpUser()}>Continue</LoginButton>
-                            <Typography style={{ cursor : 'pointer' , fontSize : 14 , textAlign : 'center' , color : '#2874f0', fontWeight :600, marginTop : 50}} onClick={()=>toggleSignIn()} >Already registered ? Login</Typography>
+                            <Typography style={{ cursor : 'pointer' , fontSize : 14 , textAlign : 'center' , color : '#2874f0', fontWeight :600, marginTop : 20}} onClick={()=>toggleSignIn()} >Already registered ? Login</Typography>
                         </Wrapper> 
                     }
                 </Box>

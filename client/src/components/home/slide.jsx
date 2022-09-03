@@ -1,7 +1,7 @@
 import Carousel from "react-multi-carousel"
 import 'react-multi-carousel/lib/styles.css';
 import Countdown from 'react-countdown'
-import { Box, Typography, styled , Button, Divider} from '@mui/material'
+import { Box, Typography, styled, Button, Divider } from '@mui/material'
 
 const Component = styled(Box)`
     margin-top : 10px;
@@ -59,7 +59,7 @@ const responsive = {
                 }
                 };
 
-const Slide = ({ products }) => {
+const Slide = ({ products, title, timer }) => {
 
     const renderer = ({ hours, minutes, seconds }) => {
         return <Box variant='span'>{ hours } : {minutes} : { seconds}  Left</Box>
@@ -70,12 +70,14 @@ const Slide = ({ products }) => {
         <Component>
             <Headline>
                 <Typography style={{ fontWeight : 600, fontSize : 24 }}>
-                    Deals of the day
+                    {title}
                 </Typography>
-                <Timer>
+                {timer &&
+                     <Timer>
                     <img src={timerURL} alt='timer' style={{ marginRight : 20 }}/>
                      <Countdown date={ Date.now() + 5.04e+7} renderer={renderer} />
                 </Timer>
+               }
                <Button variant='contained' style={{ marginLeft : 'auto', textTransform : 'none', letterSpacing : 2 }} >View All</Button>
             </Headline>
             <Divider />

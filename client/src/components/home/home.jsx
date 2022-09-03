@@ -28,6 +28,11 @@ const Home = () => {
             <Container>
                 <Banner />
                 <Slide products={products} />
+                <Slide products={products} />
+                <Slide products={products} />
+                <Slide products={products} />
+                <Slide products={products} />
+                <Slide products={products} />
             </Container>
         </>
     )

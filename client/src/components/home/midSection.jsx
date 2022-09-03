@@ -1,18 +1,32 @@
-import { Box } from "@mui/system"
 import { imageURL } from "../../constants/data"
-import { Grid } from '@mui/material'
+import { Grid , styled } from '@mui/material'
+
+
+const Wrapper = styled(Grid)`
+    margin-top : 10px;  
+`
+
+const Image = styled('img')({
+    marginTop: 10,
+    width: '100%',
+    justifyContent : 'space-between'
+})
 
 const MidSection = () => {
+    const url = 'https://rukminim1.flixcart.com/flap/3006/433/image/4789bc3aefd54494.jpg?q=50';
     return (
-        <Grid lg={12} md={12} sm={12} xs={12} container>
-            {
-                imageURL.map(image => (
-                    <Grid item lg={4} md={4} sm={12} xs={12}>
-                        <img src={image} alt='banner' style={{ width: '100%' }} />
-                    </Grid>
-                ))
-            }
-        </Grid>
+        <>
+            <Wrapper lg={12} md={12} sm={12} xs={12} container>
+                {
+                    imageURL.map(image => (
+                        <Grid item lg={4} md={4} sm={12} xs={12}>
+                            <img src={image} alt='banner' style={{ width: '100%' }} />
+                        </Grid>
+                    ))
+                }
+            </Wrapper>
+            <Image src={url} alt='covid' />  
+        </>
     )
 }
 

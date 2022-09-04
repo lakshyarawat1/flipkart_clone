@@ -5,19 +5,27 @@ import Slide from "./slide"
 const Wrapper = styled(Box)`
     display : flex;
 `
-const Left = styled(Box)`
-    width : 83%
-`
+const Left = styled(Box)(({ theme }) => ({
+    width: '83%',
+    [theme.breakpoints.down('md')]: {
+        width : '100%'
+    }
+}))
+    
 
-const Right = styled(Box)`
-    background : #fff;
-    padding : 10px;
-    padding-top  : 40px;
-    margin-top : 10px;
-    margin-left : 10px;
-    width : 16%;
-    text-align:center;
-`
+
+const Right = styled(Box)(({ theme }) => ({
+    background : '#fff',
+    padding : 10,
+    paddingTop  : 40,
+    marginTop : 10,
+    marginLeft : 10,
+    width : '16%',
+    textAlign: 'center',
+    [theme.breakpoints.down('md')]: {
+        display : 'none'
+    }
+}));
 
 
 const MidSlide = ({ products, title, timer }) => {

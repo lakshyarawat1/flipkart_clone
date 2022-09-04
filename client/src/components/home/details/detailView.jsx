@@ -1,6 +1,6 @@
 
 
-const detailView = () => {
+const DetailView = () => {
     return (
         <div>
             Hello
@@ -8,4 +8,4 @@ const detailView = () => {
     )
 }
 
-export default detailView
+export default DetailView

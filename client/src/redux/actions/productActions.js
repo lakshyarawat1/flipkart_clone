@@ -13,3 +13,11 @@ export const getProducts = () => async (dispatch) => {
         dispatch({type : actionTypes.GET_PRODUCT_FAIL , payload : error.message})
     }
 }
+
+export const getProductDetails = () => async (dispatch) => {
+    try {
+
+    } catch (error) {
+        
+    }
+}

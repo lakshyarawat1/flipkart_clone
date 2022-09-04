@@ -4,14 +4,16 @@ import Home from './components/home/home.jsx'
 
 import { Box } from '@mui/material'
 
+import {  BrowserRouter } from 'react-router-dom'
+
 function App() {
   return (
-    <div>
+    <BrowserRouter>
       <Header />
       <Box style={{ marginTop : 54 }}>
         <Home />
       </Box>
-    </div>
+    </BrowserRouter>
   );
 }
 

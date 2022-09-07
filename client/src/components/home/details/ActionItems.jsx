@@ -1,4 +1,4 @@
-
+import { ShoppingCart, FlashOn  } from '@mui/icons-material'
 import {Box, Button, styled} from '@mui/material'
 
 
@@ -8,21 +8,31 @@ const LeftContainer = styled(Box)`
 `
 
 const Image = styled('img')({
-    padding: '15px 20px',
-    border: '1px solid #f0f0f0',
-    width : '95%'
+    padding: '15px',
+    
 })
+
+const StyledButton = styled(Button)`
+    width : 48%;
+    height : 50px;
+    border-radius : 2px;
+
+`
 
 const ActionItem = ({ product } ) => {
     return (
         <LeftContainer>
-            <Image src={product.detailUrl} alt='failure' />
-            <Button variant='contained'>
+            <Box style={{ padding: '15px 20px',  border: '1px solid #f0f0f0', width : '90%'}}>
+                <Image src={product.detailUrl} alt='failure' />
+            </Box>
+            <StyledButton variant='contained' style={{ marginRight : 10, background : '#ff9f00' }}>
+                <ShoppingCart />
                 Add to Cart
-            </Button>
-            <Button variant='contained'>
+            </StyledButton>
+            <StyledButton variant='contained' style={{ background : '#fb541b' }}>
+                <FlashOn />
                 Buy Now
-            </Button>
+            </StyledButton>
         </LeftContainer>
     )
 }

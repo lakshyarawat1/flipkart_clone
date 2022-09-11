@@ -9,7 +9,8 @@ const LeftContainer = styled(Box)`
 
 const Image = styled('img')({
     padding: '15px',
-    
+    height: '30%',
+    width : '90%'
 })
 
 const StyledButton = styled(Button)`

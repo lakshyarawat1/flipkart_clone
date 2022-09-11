@@ -12,10 +12,11 @@ const Component = styled(Box)`
     margin-top : 55px;
 `
 
-const Container = styled(Grid)`
-    background :#fff;
-    display : flex;
-`
+const Container = styled(Grid)(({theme}) => ({
+    background: '#fff',
+    display: 'flex'
+    
+}))
 
 const RightContainer = styled(Grid)`
     margin-top : 50px;

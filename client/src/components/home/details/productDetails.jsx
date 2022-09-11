@@ -15,13 +15,22 @@ const StyledBadge = styled(LocalOffer)`
     color : #00cc00;
 `
 
+const ColumnText = styled(TableRow)`
+    font-size : 14px;
+    & > td {
+        font-size : 14px;
+    }
+`
+
 
 const ProductDetail = ({ product }) => {
 
 
     const fassured = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png'
     
-    const date = new Date(new Date().getTime()+(5 * 24 * 60 * 60 * 1000))
+    const date = new Date(new Date().getTime() + (5 * 24 * 60 * 60 * 1000))
+    
+    const adURL = 'https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50';
 
     return ( 
         <>
@@ -59,14 +68,46 @@ const ProductDetail = ({ product }) => {
             </SmallText>
             <Table>
                 <TableBody>
-                    <TableRow>
-                        <TableCell>
+                    <ColumnText>
+                        <TableCell style={{ color : '#878787' }}>
                             Delivery By
                         </TableCell>
-                        <TableCell>
+                        <TableCell style={{ fontWeight : 600 }}>
                             Delivery By { date.toDateString()} | ₹40
                         </TableCell>
-                    </TableRow>
+                    </ColumnText>
+                    <ColumnText>
+                        <TableCell style={{ color : '#878787' }}>
+                            Warranty
+                        </TableCell>
+                        <TableCell>
+                            No Warranty
+                        </TableCell>
+                    </ColumnText>
+                    <ColumnText>
+                        <TableCell style={{ color : '#878787' }}>
+                            Seller
+                        </TableCell>
+                        <TableCell>
+                            <Box component='span' style={{ color : '#2874f0' }}>
+                                SuperComNet
+                            </Box>
+                            <Typography style={{ fontSize : 14, marginTop : 5 }}> View More seller starting from {product.price.cost} </Typography>
+                        </TableCell>
+                    </ColumnText>
+                    <ColumnText>
+                        <TableCell colspan={ 2 }>
+                            <img src={adURL} alt='supercoin' style={{ width : 290 }} />
+                        </TableCell>
+                    </ColumnText>
+                    <ColumnText>
+                        <TableCell style={{ color : '#878787' }}>
+                            Descripton
+                        </TableCell>
+                        <TableCell>
+                            {product.description}
+                        </TableCell>
+                    </ColumnText>
                 </TableBody>
             </Table>
         </>

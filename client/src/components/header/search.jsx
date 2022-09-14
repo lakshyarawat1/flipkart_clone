@@ -1,6 +1,8 @@
-import { InputBase, Box, styled } from '@mui/material';
+import { InputBase, Box, styled, List, ListItem } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-
+import { useState , useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getProducts } from '../../redux/actions/productActions';
 
 const SearchContainer = styled(Box)`
     background : #fff;
@@ -26,14 +28,43 @@ const InputSearchBase = styled(InputBase)`
 `
 
 const Search = () => {
+
+    const [text, setText] = useState('');
+
+    const { products }  = useSelector(state => state.getProducts)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getProducts())
+    }, [dispatch])
+
+    const getText = (text) => {
+        setText(text);
+    }
+
     return (
         <SearchContainer>
             <InputSearchBase
-            placeholder ='Search for products, brands and more'
+                placeholder='Search for products, brands and more'
+                onChange={(e) => getText(e.target.value)}
             />
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
+            {
+                text &&
+                <List>
+                        {
+                            products.filter(product => product.title.longTitle.toLowerCase().includes(text.tolowerCase())).map(product => (
+                                <ListItem>
+                                    {
+                                        product.title.longTitle
+                                    }
+                                </ListItem>
+                            ))
+                        }
+                </List>
+            }
         </SearchContainer>
     )
 }

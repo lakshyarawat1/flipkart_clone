@@ -1,6 +1,6 @@
 import { ShoppingCart, FlashOn  } from '@mui/icons-material'
-import {Box, Button, styled} from '@mui/material'
-
+import { Box, Button, styled } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const LeftContainer = styled(Box)(({ theme }) => ({
     minWidth: '40%',
@@ -24,13 +24,20 @@ const StyledButton = styled(Button)`
 
 `
 
-const ActionItem = ({ product } ) => {
+const ActionItem = ({ product }) => {
+    
+    const navigate = useNavigate()
+
+    const addItemToCart = () => {
+        navigate('/cart')
+    }
+
     return (
         <LeftContainer>
             <Box style={{ padding: '15px 20px',  border: '1px solid #f0f0f0', width : '90%'}}>
                 <Image src={product.detailUrl} alt='failure' />
             </Box>
-            <StyledButton variant='contained' style={{ marginRight : 10, background : '#ff9f00' }}>
+            <StyledButton variant='contained' style={{ marginRight : 10, background : '#ff9f00' }} onClick={() => addItemToCart()} >
                 <ShoppingCart />
                 Add to Cart
             </StyledButton>

@@ -3,11 +3,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useState , useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
+import { Link } from 'react-router-dom'
 
 const SearchContainer = styled(Box)`
     background : #fff;
     width : 34%;
-    border-radius : 2px;
+    border-radius : 2px; 
     margin-left : 10px;
     display : flex;
     height : 38px;
@@ -19,6 +20,12 @@ const SearchIconWrapper = styled(Box)`
     padding : 5px;
     padding-top : 8px;
     display:flex;
+`
+
+const ListWrapper = styled(List)`
+    position : absolute;
+    width : 33%;
+    margin-top : 35px;
 `
 
 const InputSearchBase = styled(InputBase)`
@@ -47,23 +54,26 @@ const Search = () => {
             <InputSearchBase
                 placeholder='Search for products, brands and more'
                 onChange={(e) => getText(e.target.value)}
+                value={text}
             />
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
             {
                 text &&
-                <List>
+                <ListWrapper>
                         {
-                            products.filter(product => product.title.longTitle.toLowerCase().includes(text.tolowerCase())).map(product => (
-                                <ListItem>
+                            products.filter(product => product.title.longTitle.toLowerCase().includes(text.toLowerCase())).map(product => (
+                                <ListItem style={{ background: '#fff', color: '#000', paddingBottom: 15 }}>
+                                    <Link to={`/product/${product.id}`}  onClick={() => setText(``)} style={{ textDecoration : 'none', color : 'inherit' }} >
                                     {
                                         product.title.longTitle
                                     }
+                                    </Link>
                                 </ListItem>
                             ))
                         }
-                </List>
+                </ListWrapper>
             }
         </SearchContainer>
     )

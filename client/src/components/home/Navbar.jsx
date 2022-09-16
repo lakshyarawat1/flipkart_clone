@@ -3,7 +3,7 @@ import { navData }  from '../../constants/data'
 
 const Wrapper = styled(Box)(({theme}) => ({
     display : 'flex',
-    margin : '55px 52px 0 52px',
+    margin: '55px 52px 0 52px',
     justifyContent: 'space-between',
     [theme.breakpoints.down('lg')]: {
         margin : 0
@@ -24,18 +24,20 @@ const Text = styled(Typography)`
 const NavBar = () => {
 
     return (
-        <Wrapper>
-            {
-                navData.map(data => (
-                    <Container>
-                        <img src={ data.url } alt='nav' style = {{ width : 64 }} />
-                        <Text>
-                            { data.text }
-                        </Text>
-                    </Container>
-                ))
-            }
-        </Wrapper>
+        <Box style={{  backgroundColor : '#fff' }}>
+            <Wrapper>
+                {
+                    navData.map(data => (
+                        <Container>
+                            <img src={ data.url } alt='nav' style = {{ width : 64 }} />
+                            <Text>
+                                { data.text }
+                            </Text>
+                        </Container>
+                    ))
+                }
+            </Wrapper>
+        </Box>
     )
 }
 

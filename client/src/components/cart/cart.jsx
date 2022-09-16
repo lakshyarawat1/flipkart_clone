@@ -1,10 +1,37 @@
-
+import { useSelector } from "react-redux"
+import { Grid, Box, Typography } from '@mui/material'
+import CartItem from './cartItem'
 
 const Cart = () => {
+    
+    const { cartItems } = useSelector(state => state.cart);
     return (
-        <div>
-            This is cart
-        </div>
+        <>
+            {
+                cartItems.length ?
+                    <Grid container>
+                        <Grid item lg={ 9 } md={9} sm={12} xs={12}>
+                            <Box>
+                                <Typography>
+                                    My Cart ({ cartItems.length })
+                                </Typography>
+                            </Box>
+                            {
+                                cartItems.map(item => {
+                                    <CartItem />
+                                })
+                            }
+                        </Grid>
+                        <Grid item lg={3} md={3} sm={12} xs={12}>
+
+                        </Grid>
+                    </Grid>
+                    :
+                    <div>
+                        Empty
+                    </div>
+            }
+        </>
     )
 }
 

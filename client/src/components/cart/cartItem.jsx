@@ -5,6 +5,7 @@ import ButtonGroup from './buttonGroups'
 const Component = styled(Box)`
     border-top : 1px solid #f0f0f0;
     display : flex;
+    background : #fff;
 `
 
 const LeftComponent = styled(Box)`
@@ -51,7 +52,7 @@ const CartItem = ({ item }) => {
                     <Typography style={{ margin : '20px 0' }}>
                         <Box component='span' style={{ fontSize : 18, fontWeight : 600 }}>₹{item.price.cost}</Box>&nbsp;&nbsp;&nbsp;
                         <Box component='span' style={{ color : '#878787' }}><strike>₹{item.price.mrp} </strike></Box>&nbsp;&nbsp;&nbsp;
-                        <Box component='span' style={{ color : '#388e3c' }}>₹{item.price.discount}</Box>
+                        <Box component='span' style={{ color : '#388e3c' }}>{item.price.discount} off </Box>
                     </Typography>
                     <RemoveButton>
                         Remove

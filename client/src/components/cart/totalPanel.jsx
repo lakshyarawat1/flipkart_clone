@@ -1,40 +1,75 @@
-import { Box, Typography } from "@mui/material"
+import {styled, Box, Typography } from "@mui/material"
 
+
+const Header = styled(Box)`
+    padding : 15px 24px;
+    background : #fff;
+    border-bottom : 1px solid #f0f0f0;
+`
+
+const Heading = styled(Typography)`
+    color : #878787;
+`
+
+const Container = styled(Box)`
+    padding : 15px 24px;
+    background : #fff;
+    & > p {
+        margin-bottom :20px;
+        font-size : 14px;
+    }
+    & > h6 {
+        margin-bottom : 20px;
+    }
+`
+
+const Price = styled(Box)`
+    float : right;
+`
+
+const Discount = styled(Typography)`
+    color : green;
+    font-weight : 500;
+`
 
 const TotalPanel = ({ cartItems }) => {
     return (
         <Box>
-            <Box>
-                <Typography>
+            <Header>
+                <Heading>
                     PRICE DETAILS
-                </Typography>
-            </Box>
-            <Box>
+                </Heading>
+            </Header>
+            <Container>
                 <Typography>
                     Price ({cartItems?.length} items)
-                    <Box component='span'>
+                    <Price component='span'>
                         ₹100
-                    </Box>
+                    </Price>
                     </Typography>
                 <Typography>
                     Discount
-                    <Box component='span'>
+                    <Price component='span'>
                         -₹100
-                    </Box>
+                    </Price>
                     </Typography>
                 <Typography>
                     Delivery Charges
-                <Box component='span'>
+                <Price component='span'>
                     ₹100
-                    </Box>
+                    </Price>
                     </Typography>
-                <Typography>
+                <Typography variant='h6'>
                     Total Amount
-                    <Box component='span'>
+                    <Price component='span'>
                         ₹100
-                    </Box>
+                    </Price>
                 </Typography>
-            </Box>
+                <Discount>
+                    You will save 
+                    <Price component='span'>₹100</Price>
+                </Discount>
+            </Container>
         </Box>
     )
 }

@@ -1,7 +1,10 @@
-import { Button, Box, Typography , styled } from '@mui/material'
+import { Button, Box, Typography , styled , Badge } from '@mui/material'
 import { ShoppingCart } from '@mui/icons-material'
 import { useState } from 'react'
 import LoginDialog from '../login/LoginDialog'
+import { Link } from 'react-router-dom'
+import { useSelector  } from 'react-redux'
+
 
 const Wrapper = styled(Box)`
     display : flex;
@@ -18,8 +21,10 @@ const LoginButton = styled(Button)`
     box-shadow : 0;
 `
 
-const Container = styled(Box)`
+const Container = styled(Link)`
     display : flex;
+    text-decoration : none;
+    color : inherit;
 `
 
 const CustomButtons = () => {
@@ -28,6 +33,8 @@ const CustomButtons = () => {
     const openDialog = () => {
         setOpen(true)
     }
+
+    const { cartItems } = useSelector(state => state.cart)
 
     return (
         <Wrapper>
@@ -40,8 +47,9 @@ const CustomButtons = () => {
             <Typography style={{ marginLeft : 40 }}>
                 More
             </Typography>
-            <Container>
-                <ShoppingCart style={{ marginLeft : 50 }} />
+            <Container to="/cart">
+                <ShoppingCart style={{ marginLeft: 50 }} />
+                <Badge badgeContent={cartItems?.length} color='secondary'  />
                 <Typography>
                     Cart
                 </Typography>

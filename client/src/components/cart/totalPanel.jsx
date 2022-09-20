@@ -1,5 +1,5 @@
 import {styled, Box, Typography } from "@mui/material"
-
+import { useState, useEffect } from 'react';
 
 const Header = styled(Box)`
     padding : 15px 24px;
@@ -33,6 +33,24 @@ const Discount = styled(Typography)`
 `
 
 const TotalPanel = ({ cartItems }) => {
+
+    const [price, setPrice] = useState(0)
+    const [discount, setDiscount] = useState(0)
+
+    useEffect(() => {
+        totalAmount()
+    }, [cartItems])
+
+    const totalAmount = () => {
+        let price = 0,
+            discount = 0;
+        cartItems.map(item => {
+            price += item.price.mrp;
+            discount += (item.price.mrp - item.price.cost)
+        })
+        setPrice(price)
+        setDiscount(discount)
+    }
     return (
         <Box>
             <Header>
@@ -44,30 +62,30 @@ const TotalPanel = ({ cartItems }) => {
                 <Typography>
                     Price ({cartItems?.length} items)
                     <Price component='span'>
-                        ₹100
+                        ₹{price}
                     </Price>
                     </Typography>
                 <Typography>
                     Discount
                     <Price component='span'>
-                        -₹100
+                        -₹{discount}
                     </Price>
                     </Typography>
                 <Typography>
                     Delivery Charges
                 <Price component='span'>
-                    ₹100
+                    ₹40
                     </Price>
                     </Typography>
                 <Typography variant='h6'>
                     Total Amount
                     <Price component='span'>
-                        ₹100
+                        ₹{price - discount + 40}
                     </Price>
                 </Typography>
                 <Discount>
                     You will save 
-                    <Price component='span'>₹100</Price>
+                    <Price component='span'>₹{ discount - 40 } </Price>
                 </Discount>
             </Container>
         </Box>

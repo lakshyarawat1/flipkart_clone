@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from "axios";
 
-const url = 'http://localhost:4000'
+const url = "http://localhost:4000";
 
 export const authenticateSignUp = async (user) => {
   try {
@@ -14,6 +14,6 @@ export const authenticateLogin = async (user) => {
   try {
     return await axios.post(`${url}/login`, user);
   } catch (error) {
-    console.log("error while calling login API: ", error);
+    return error;
   }
 };

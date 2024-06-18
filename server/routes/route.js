@@ -8,7 +8,10 @@ router.post('/signup', userSignUp)
 
 router.post('/login', userLogin)
 
-router.get('/products', getProducts)
+router.get('/products', async (req, res) => {
+    const products = await getProducts()
+    res.json(products)
+})
 
 router.get('/product/:id', getProductById)
 

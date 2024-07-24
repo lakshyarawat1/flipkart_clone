@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const Component = styled(Box)`
   height: 80vh;
-  width: 90vh;
+  width: 80vh;
 `;
 
 const Tagline = styled(Box)`
@@ -23,6 +23,7 @@ const LoginButton = styled(Button)`
   width: 80%;
   margin-left: 30px;
   border-radius: 2px;
+  :hover:color:#000;
   margin-top: 10px;
   text-transform: none;
   font-weight: 600;
@@ -90,6 +91,27 @@ const LoginDialog = ({ open, setOpen }) => {
   const [signup, setSignUp] = useState(signUpInitialValues);
   const [login, setLogin] = useState(loginInitialValues);
   const [error] = useState(false);
+  const [password, setPassword] = useState("");
+  const [validLength, setValidLength] = useState(false);
+  const [hasUpperCase, setHasUpperCase] = useState(false);
+  const [hasLowerCase, setHasLowerCase] = useState(false);
+  const [hasNumber, setHasNumber] = useState(false);
+  const [hasSpecialChar, setHasSpecialChar] = useState(false);
+
+  const validatePassword = (password) => {
+    setValidLength(password.length >= 8);
+    setHasUpperCase(/[A-Z]/.test(password));
+    setHasLowerCase(/[a-z]/.test(password));
+    setHasNumber(/\d/.test(password));
+    setHasSpecialChar(/[!@#$%^&*(),.?":{}|<>]/.test(password));
+  };
+
+  const handleChange = (e) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    validatePassword(newPassword);
+    setSignUp({ ...signup, [e.target.name]: e.target.value });
+  };
 
   const toggleSignUp = () => {
     toggleAccount(accountInitialValues.signup);
@@ -110,27 +132,49 @@ const LoginDialog = ({ open, setOpen }) => {
 
   const loginUser = async () => {
     let response = await authenticateLogin(login);
-    console.log(response);
     if (response.status === 200) {
+      sessionStorage.setItem("token", response.data.user.token);
+      toast("Logged in successfully !");
       handleClose();
-    } else {
-      toast("Try Again");
+      window.location.reload();
+    } else if (response.status === 401) {
+      toast("Invalid username or password");
+    } else if (response.status === 404) {
+      toast("User not found");
     }
   };
 
   const onInputChange = (e) => {
     setSignUp({ ...signup, [e.target.name]: e.target.value });
-    console.log(signup);
   };
 
   const signUpUser = async () => {
-    let response = await authenticateSignUp(signup);
-    if (!response) return;
+    const signUpDetails = {
+      userName: signup.userName,
+      email: signup.email,
+      phone: signup.phone,
+      password: password,
+      firstName: signup.firstName,
+      lastName: signup.lastName,
+    };
+    let response = await authenticateSignUp(signUpDetails);
+    if (response.status === 401) {
+      toast("User already exists !");
+    }
+    if (response.status === 403) {
+      toast("Password too weak !");
+    }
+    if (response.status === 200) {
+      toast("User created successfully");
+      sessionStorage.setItem("token", response.data.user.token);
+    }
+    console.log(response.data.user.token);
     handleClose();
+    setPassword("");
   };
   return (
     <Dialog open={open} onClose={handleClose}>
-      <Component>
+      <Component style={{}}>
         <Box style={{ display: "flex" }}>
           <Image>
             <Heading>{account.heading}</Heading>
@@ -139,7 +183,7 @@ const LoginDialog = ({ open, setOpen }) => {
             </Typography>
           </Image>
           {account.view === "login" ? (
-            <Box>
+            <Box style={{}}>
               <TextField
                 onChange={(e) => onValueChange(e)}
                 name="userName"
@@ -193,28 +237,6 @@ const LoginDialog = ({ open, setOpen }) => {
             <Wrapper>
               <TextField
                 variant="standard"
-                name="firstName"
-                onChange={(e) => onInputChange(e)}
-                label="Enter First Name"
-                style={{
-                  width: "70%",
-                  marginTop: 20,
-                  marginLeft: 25,
-                }}
-              />
-              <TextField
-                variant="standard"
-                name="lastName"
-                onChange={(e) => onInputChange(e)}
-                label="Enter Last Name"
-                style={{
-                  width: "70%",
-                  marginTop: 20,
-                  marginLeft: 25,
-                }}
-              />
-              <TextField
-                variant="standard"
                 onChange={(e) => onInputChange(e)}
                 label="Enter Username"
                 name="userName"
@@ -237,17 +259,6 @@ const LoginDialog = ({ open, setOpen }) => {
               />
               <TextField
                 variant="standard"
-                name="password"
-                onChange={(e) => onInputChange(e)}
-                label="Enter Password"
-                style={{
-                  width: "70%",
-                  marginTop: 20,
-                  marginLeft: 25,
-                }}
-              />
-              <TextField
-                variant="standard"
                 name="phone"
                 onChange={(e) => onInputChange(e)}
                 label="Enter Phone"
@@ -257,6 +268,35 @@ const LoginDialog = ({ open, setOpen }) => {
                   marginLeft: 25,
                 }}
               />
+              <div>
+                <TextField
+                  variant="standard"
+                  style={{ fontWeight: 600, margin: 25, width: "70%" }}
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                  placeholder="Enter your password"
+                />
+                <ul>
+                  <li style={{ color: validLength ? "green" : "red" }}>
+                    Minimum 8 characters
+                  </li>
+                  <li style={{ color: hasUpperCase ? "green" : "red" }}>
+                    At least one uppercase letter
+                  </li>
+                  <li style={{ color: hasLowerCase ? "green" : "red" }}>
+                    At least one lowercase letter
+                  </li>
+                  <li style={{ color: hasNumber ? "green" : "red" }}>
+                    At least one number
+                  </li>
+                  <li style={{ color: hasSpecialChar ? "green" : "red" }}>
+                    At least one special character
+                  </li>
+                </ul>
+              </div>
+
               <LoginButton onClick={() => signUpUser()}>Continue</LoginButton>
               <Typography
                 style={{

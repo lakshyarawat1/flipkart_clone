@@ -3,14 +3,14 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
     min: 5,
     max: 20,
   },
   lastName: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
     min: 5,
     max: 20,
@@ -36,10 +36,9 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required : true,
+    required: true,
   },
-}
-);
+});
 
 const user = mongoose.model("user", userSchema);
 

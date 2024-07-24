@@ -17,3 +17,15 @@ export const authenticateLogin = async (user) => {
     return error;
   }
 };
+
+export const validate = async () => {
+  try {
+    return await axios.get(`${url}/get-user`, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    });
+  } catch (error) {
+    return error;
+  }
+};

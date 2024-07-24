@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --trace-deprication index.js"
+    "start": "nodemon --trace-deprecation index.js"
   },
   "repository": {
     "type": "git",
@@ -22,13 +22,22 @@
   },
   "homepage": "https://github.com/lakshyarawat1/flipkart_clone#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "dotenv-vault": "^1.26.1",
     "ejs": "^3.1.10",
     "express": "^4.18.1",
+    "express-rate-limit": "^7.3.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^6.11.3",
-    "nodemon": "^2.0.19"
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "eslint": "^9.7.0",
+    "globals": "^15.8.0"
   }
 }

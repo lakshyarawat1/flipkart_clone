@@ -1,5 +1,5 @@
 import { Box, styled } from "@mui/material";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import NavBar from "./Navbar";
 import Banner from "./banner";
 import { getProducts } from "../../redux/actions/productActions.js";
@@ -9,6 +9,7 @@ import MidSlide from "./midSlide";
 import MidSection from "./midSection";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { validate } from "../../services/api.js";
 
 const Container = styled(Box)`
   padding: 20px 10px 10px 10px;
@@ -22,6 +23,9 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getProducts());
+    if (sessionStorage.getItem("token")) {
+      validate();
+    }
   }, [dispatch]);
   return (
     <>

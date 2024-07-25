@@ -1,7 +1,10 @@
 import axios from "axios";
 
 export const validateCurrentUser = async (token) => {
-  const user = await axios.get("/get-user", token);
+  const user = await axios.get(
+    "https://flipkart-clone-rho-sable.vercel.app/get-user",
+    token
+  );
   return user;
 };
 

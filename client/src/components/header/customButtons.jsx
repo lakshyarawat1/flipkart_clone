@@ -13,11 +13,14 @@ const Wrapper = styled(Box)`
 const LoginButton = styled(Button)`
   background: #fff;
   color: #2874f0;
-  height: 30px;
   width: 125px;
   text-transform: none;
   font-weight: 600;
-  border-radius: 0;
+  border-radius: 10;
+  :hover {
+    background: #2874f0;
+    color: #fff;
+  }
   box-shadow: 0;
 `;
 
@@ -49,11 +52,11 @@ const CustomButtons = () => {
   return (
     <Wrapper>
       {currentUser ? (
-        <div>
+        <div style={{ alignItems: "center", justifyItems: "center" }}>
           <Typography>{currentUser.user.firstName}</Typography>
           <LoginButton
             variant="outlined"
-            style={{ marginLeft: 25 }}
+            style={{ marginLeft: 25, marginTop: "-10px" }}
             onClick={() => {
               sessionStorage.removeItem("token");
               window.location.reload();

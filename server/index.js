@@ -31,7 +31,7 @@ app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    // origin: "http://localhost:3000",
+    origin: "https://flipkart-clone-rho-sable.vercel.app/",
     method: ["GET", "POST"],
   })
 );
@@ -39,10 +39,10 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'localhost:3000'"],
-      styleSrc: ["'self'", "'localhost:3000'"],
+      scriptSrc: ["'self'", "'https://flipkart-clone-rho-sable.vercel.app/'"],
+      styleSrc: ["'self'", "'https://flipkart-clone-rho-sable.vercel.app/'"],
       imgSrc: ["'self'", "data:"],
-      connectSrc: ["'self'", "http://localhost:3000"],
+      connectSrc: ["'self'", "https://flipkart-clone-rho-sable.vercel.app/"],
     },
   })
 );

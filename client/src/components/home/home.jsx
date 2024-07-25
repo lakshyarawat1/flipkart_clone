@@ -1,5 +1,5 @@
 import { Box, styled } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "./Navbar";
 import Banner from "./banner";
 import { getProducts } from "../../redux/actions/productActions.js";
@@ -19,30 +19,36 @@ const Container = styled(Box)`
 const Home = () => {
   const { products } = useSelector((state) => state.getProducts);
 
+  const [user, setUser] = useState();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProducts());
-    if (sessionStorage.getItem("token")) {
-      validate();
-    }
-  }, [dispatch]);
-  return (
-    <>
-      <NavBar />
-      <ToastContainer />
-      <Container>
-        <Banner />
-        <MidSlide products={products} title="Deal of the day" timer={true} />
-        <MidSection />
-        <Slide products={products} title="Electronics" timer={false} />
-        <Slide products={products} title="Top sellers" timer={false} />
-        <Slide products={products} title="Suggested Items" timer={false} />
-        <Slide products={products} title="Trending" timer={false} />
-        <Slide products={products} title="Season top buys" timer={false} />
-      </Container>
-    </>
-  );
+    validate().then((res) => {
+      setUser(res);
+    });
+  }, []);
+  if (user) {
+    return (
+      <>
+        <NavBar />
+        <ToastContainer />
+        <Container>
+          <Banner />
+          <MidSlide products={products} title="Deal of the day" timer={true} />
+          <MidSection />
+          <Slide products={products} title="Electronics" timer={false} />
+          <Slide products={products} title="Top sellers" timer={false} />
+          <Slide products={products} title="Suggested Items" timer={false} />
+          <Slide products={products} title="Trending" timer={false} />
+          <Slide products={products} title="Season top buys" timer={false} />
+        </Container>
+      </>
+    );
+  } else {
+    return <div>Loading...</div>;
+  }
 };
 
 export default Home;

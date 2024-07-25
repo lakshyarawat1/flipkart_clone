@@ -119,6 +119,6 @@ export const getCurrentUser = async (req, res) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     return res.status(200).json({ user: decoded });
   } catch (err) {
-    return res.status(403).json("Invalid token.", { message: err.message });
+    return res.status(403).json({ message: err.message });
   }
 };

@@ -48,7 +48,7 @@ const Cart = () => {
         <>  
             {
                 cartItems.length ?
-                    <Container container>
+                    <Container container item>
                         <LeftComponent item lg={ 9 } md={9} sm={12} xs={12}>
                             <Header>
                                 <Typography>

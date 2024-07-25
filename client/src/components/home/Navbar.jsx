@@ -28,7 +28,7 @@ const NavBar = () => {
             <Wrapper>
                 {
                     navData.map(data => (
-                        <Container>
+                        <Container key={data.id}>
                             <img src={ data.url } alt='nav' style = {{ width : 64 }} />
                             <Text>
                                 { data.text }

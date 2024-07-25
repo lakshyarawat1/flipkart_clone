@@ -20,11 +20,13 @@ export const authenticateLogin = async (user) => {
 
 export const validate = async () => {
   try {
-    return await axios.get(`${url}/get-user`, {
+    const validation = await axios.get(`${url}/get-user`, {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },
     });
+    console.log(validation.data);
+    return validation.data;
   } catch (error) {
     return error;
   }
